@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数字闽侯应用示范</title>
+    <link rel="stylesheet" href="css/lib/bootstrap.css">
+    <link rel="stylesheet" href="css/lib/animate.css">
+    <link rel="stylesheet" href="css/timeline.css">
+    <link rel="stylesheet" href="css/BMap.css" />
+    <link rel="stylesheet" href="css/index.css">
+    <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yFaUp3RA2X7G6owUwKKvVQEH"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+    <script type="text/javascript" src="js/lib/echarts.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</head>
+<body>
+
+<div class="mainframe">
+    <div class="leftframe">
+        <header class="headerlogo">数字闽侯应用示范</header>
+       <div class="tab active" onclick="selecttab(1)">
+           <div class="tabchild"><img src="images/1.png" alt=""><br>城市运行管理</div>
+       </div>
+        <div class="tab" onclick="selecttab(2)">
+            <div class="tabchild"><img src="images/2.png" alt=""><br>产业经济发展</div>
+        </div>
+        <div class="tab" onclick="selecttab(3)">
+            <div class="tabchild"><img src="images/3.png" alt=""><br>政府舆情应对能力</div>
+        </div>
+    </div>
+
+    <div id="rightframe1" class="rightframe">
+        <div class="directory"><img src="images/d01.png"> <a href="index.html">首页</a> &gt; 城市运行管理</div>
+        <div class="chart">
+            <div class="chart-title">
+                <img src="images/ico01.png"> 重点项目进展分析
+            </div>
+            <div class="chart-tab tab1">
+                <ul>
+                    <li><a href="###"  onclick="chart1tab(1,this)" class="chart-tab-select">项目数量</a></li>
+                    <li><a href="###"  onclick="chart1tab(2,this)">总投资</a></li>
+                    <!--<li><a href="###"  onclick="chart1tab(3,this)">年计划投资</a></li>-->
+                    <li><a href="###"  onclick="chart1tab(4,this)">累计完成投资</a></li>
+                </ul>
+            </div>
+            <div id="chart1" class="chart-canvas" style="height: 330px"></div>
+        </div>
+        <div class="chart">
+            <div class="chart-title">
+                <img src="images/ico02.png"> 三公经费分析
+            </div>
+            <!--<div class="chart-tab">-->
+                <!--<ul>-->
+                    <!--<li><a href="###"  onclick="chart2tab(1,this)" class="chart-tab-select">合计</a></li>-->
+                    <!--<li><a href="###"  onclick="chart2tab(2,this)">因公出国</a></li>-->
+                    <!--<li><a href="###"  onclick="chart2tab(3,this)">公务接待费</a></li>-->
+                    <!--<li><a href="###"  onclick="chart2tab(4,this)">公车维护费</a></li>-->
+                    <!--<li><a href="###"  onclick="chart2tab(5,this)">公车购置费</a></li>-->
+                    <!--<li><a href="###"  onclick="chart2tab(6,this)">会议费</a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
+            <div id="chart2" class="chart-canvas"></div>
+        </div>
+        <div class="chart">
+            <div class="chart-title">
+                <img src="images/ico03.png"> 年内经济指标完成情况
+          </div>
+            <div id="chart3" class="chart-canvas"></div>
+        </div>
+        <div class="chart">
+            <div class="chart-title">
+                <img src="images/ico04.png"> 医疗资源分布
+          </div>
+            <div id="chart4" class="chart-canvas" ></div>
+        </div>
+        <div class="chart" style="color: #1b6d85">
+            <div class="chart-title">
+                <img src="images/ico05.png"> 警务信息
+            </div>
+            <div  id="chart5" class="chart-canvas" style="overflow: auto">
+                <!--<div>2016</div>-->
+                <section id="cd-timeline" class="cd-container">
+                </section>
+            </div>
+        </div>
+        <div class="chart">
+            <div class="chart-title">
+                <img src="images/ico06.png"> 社保信息
+            </div>
+            <div class="chart-tab tab6" style="color: black;width: 100%">
+                <ul style="width: 30%">
+                    <li><a href="###"  class="chart-tab-select">按区域</a></li>
+                    <li><a href="###" >按月份</a></li>
+                </ul>
+                <div class="tab-select" id="tab-select"></div>
+                <select class="getsbby" id="getsb"></select>
+                <select class="getsbby" id="sbtype">
+                    <option value="paidnum">人数统计</option>
+                    <option value="paidmoney">资金统计</option>
+                    <option value="renewalrate">续保率</option>
+                </select>
+
+            </div>
+            <div id="chart6" class="chart-canvas" style="height: 300px"></div>
+        </div>
+    </div>
+    <div id="rightframe2" class="rightframe">
+        <div class="directory"><img src="images/d01.png"> <a href="index.html">首页</a> &gt; 产业经济发展</div>
+        <div class="chart">
+            <div class="chart-title"><img src="images/in01.png"> 产业布局
+            </div>
+            <div class="chart-canvas">
+            <!-- 代码部分begin -->
+        <div class="m_map">
+            <div class="mp mp1">
+                <div class="feng">
+                    <div class="tree">
+                        <div class="sang">
+                        </div>
+                     <div class="boou">
+                            <img src="images/mp1.jpg" alt="延坪" /></div>
+                        <div class="du_size">
+                            <p>暂无数据</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mito find_mi1">延坪</div>
+            </div>
+            <div class="mp mp2">
+                <div class="feng">
+                    <div class="tree">
+                        <div class="sang">
+                        </div>
+                        <div class="boou">
+                            <img src="images/mp2.jpg" alt="" /></div>
+                        <div class="du_size">
+                            <p>畜牧业:13103万元</p>
+                            <p>农、林、牧、渔服务业:11608万元</p>
+                            <p>总计:30566.36万元</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mito">洋里</div>
+            </div>
+            <div class="mp mp3">
+                <div class="feng">
+                    <div class="tree">
+                        <div class="sang">
+                        </div>
+                        <div class="boou">
+                            <img src="images/mp3.jpg" alt="" /></div>
+                        <div class="du_size">
+                            <p>房地产:1650044.32万元</p>
+                            <p>商务服务业:528377.41万元</p>
+                            <p>林业:35440万元</p>
+                            <p>总计:160373.63万元</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mito">大湖</div>
+            </div>
+            <div class="mp mp4">
+                <div class="feng">
+                    <div class="tree">
+                        <div class="sang">
+                        </div>
+                        <div class="boou">
+                            <img src="images/mp4.jpg" alt="" /></div>
+                        <div class="du_size">
+                            <p>
+                                暂无数据
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mito">
+                    小箬</div>
+            </div>
+            <div class="mp mp5">
+                <div class="feng">
+                    <div class="tree">
+                        <div class="sang">
+                        </div>
+                        <div class="boou">
+                            <img src="images/mp5.jpg" alt="" /></div>
+                        <div class="du_size">
+                            <p>木材加工及木、竹等制品业:32468.55万元</p>
+                            <p>渔业:7211.4万元</p>
+                            <p>总计:166161.08万元</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mito">
+                    白沙</div>
+            </div>
+            <div class="mp mp6">
+                <div class="feng">
+                    <div class="tree">
+                        <div class="sang">
+                        </div>
+                        <div class="boou">
+                            <img src="images/mp6.jpg" alt="" /></div>
+                        <div class="du_size">
+                            <p>食品制造业:77409.336万元</p>
+                            <p>仪器仪表及文化办公机械制造:57973万元</p>
+                            <p>文化艺术业:52397.32万元</p>
+                            <p>总计:539981.1326万元</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mito">
+                    荆溪</div>
+            </div>
+            <div class="mp mp7">
+                <div class="feng">
+                    <div class="tree">
+                        <div class="sang">
+                        </div>
+                        <div class="boou">
+                            <img src="images/mp7.jpg" alt="" /></div>
+                        <div class="du_size">
+                            <p>工艺品及其他制造业:211756.2万元</p>
+                            <p>非金属矿物制品业:208561.1万元</p>
+                            <p>金属制品业:179937.22万元</p>
+                            <p>总计:1787553.095862万元</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mito">
+                    甘蔗</div>
+            </div>
+            <div class="mp mp8">
+                <div class="feng">
+                    <div class="tree">
+                        <div class="sang">
+                        </div>
+                        <div class="boou">
+                            <img src="images/mp8.jpg" alt="" /></div>
+                        <div class="du_size">
+                            <p>其他服务业:41644.36万元</p>
+                            <p>总计:110937.86万元</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mito">
+                    鸿尾</div>
+            </div>
+            <div class="mp mp9">
+                <div class="feng">
+                    <div class="tree">
+                        <div class="sang">
+                        </div>
+                        <div class="boou">
+                            <img src="images/mp9.jpg" alt="" /></div>
+                        <div class="du_size">
+                            <p>居民服务业:2269万元</p>
+                            <p>航空运输业:300万元</p>
+                            <p>总计:142733.11万元</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mito">
+                    竹岐</div>
+            </div>
+            <div class="mp mp10">
+                <div class="feng">
+                    <div class="tree">
+                        <div class="sang">
+                        </div>
+                        <div class="boou">
+                            <img src="images/mp10.jpg" alt="" /></div>
+                        <div class="du_size">
+                            <p>批发业:558778.81万元</p>
+                            <p>专用设备制造业:117472.03万元</p>
+                            <p>专业技术服务业:105742万元</p>
+                            <p>总计:666602.7858万元</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mito">
+                    上街</div>
+            </div>
+            <div class="mp mp11">
+                <div class="feng">
+                    <div class="tree">
+                        <div class="sang">
+                        </div>
+                        <div class="boou">
+                            <img src="images/mp11.jpg" alt="" /></div>
+                        <div class="du_size">
+                            <p>农业:104145.893万元</p>
+                            <p>银行业:67599.3824万元</p>
+                            <p>电气机械及器材制造业:55454万元</p>
+                            <p>总计:433412.65万元</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mito">
+                    南屿</div>
+            </div>
+            <div class="mp mp12">
+                <div class="feng">
+                    <div class="tree">
+                        <div class="sang">
+                        </div>
+                        <div class="boou">
+                            <img src="images/mp12.jpg" alt="" /></div>
+                        <div class="du_size">
+                            <p>农副食品加工业:99687.8326万元</p>
+                            <p>非金属矿采选业:6569万元</p>
+                            <p>总计:408391.8854万元</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mito">
+                    南通</div>
+            </div>
+            <div class="mp mp13">
+                <div class="feng">
+                    <div class="tree">
+                        <div class="sang">
+                        </div>
+                        <div class="boou">
+                            <img src="images/mp13.jpg" alt="" /></div>
+                        <div class="du_size">
+                            <p>零售业:180341.3万元</p>
+                            <p>租赁业:137696.54万元</p>
+                            <p>塑料制品业:40834.9万元</p>
+                            <p>总计:496805.61万元</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mito">
+                    青口</div>
+            </div>
+            <div class="mp mp14">
+                <div class="feng">
+                    <div class="tree">
+                        <div class="sang">
+                        </div>
+                        <div class="boou">
+                            <img src="images/mp14.jpg" alt="" /></div>
+                        <div class="du_size">
+                            <p>建筑装饰业:100万元</p>
+                            <p>总计:178431.9865万元</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mito">
+                    尚干</div>
+            </div>
+            <div class="mp mp15">
+                <div class="feng">
+                    <div class="tree">
+                        <div class="sang">
+                        </div>
+                        <div class="boou">
+                            <img src="images/mp15.jpg" alt="" /></div>
+                        <div class="du_size">
+                            <p>仓储业:26039万元</p>
+                            <p>饮料制造业:15885万元</p>
+                            <p>软件业:12203万元</p>
+                            <p>总计:372342.23万元</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mito">
+                    祥谦</div>
+            </div>
+        </div>
+        <script>
+            $(function(){
+                $(".mp").mouseover(function () {
+                    $(this).find(".feng").show();
+                }).mouseout(function () {
+                    $(this).find(".feng").hide();
+    
+                });
+            })
+        </script>
+   	<!-- 代码部分end -->
+            </div>
+        </div>
+        <div class="chart">
+            <div class="chart-title">
+                <img src="images/in02.png">产业分析图
+            </div>
+            <div class="chart-tab tab8">
+                <ul>
+                    <li><a href="###"  onclick="chart8tab(1,this)" class="chart-tab-select">企业分布</a></li>
+                    <li><a href="###"  onclick="chart8tab(2,this)">行业数量</a></li>
+                </ul>
+            </div>
+            <div id="chart8" class="chart-canvas" style="color:black;height: 300px;overflow-y: auto;overflow-x: hidden">
+                <!--<table class="table table-bordered table-hover table-redblack" id="table-redblack">-->
+                <!--</table>-->
+            </div>
+        </div>
+        <div class="chart">
+            <div class="chart-title">
+                <img src="images/in03.png"> 新注册企业数据分析
+            </div>
+            <!--<div class="chart-tab">-->
+            <!--<ul>-->
+            <!--<li><a href="###"  onclick="chart2tab(1,this)">注册数量</a></li>-->
+            <!--<li><a href="###"  onclick="chart2tab(2,this)">注册资金</a></li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <div id="chart9" class="chart-canvas"></div>
+        </div>
+        <div class="chart">
+            <div class="chart-title">
+                <img src="images/in04.png"> 新注册企业企业分析
+            </div>
+            <div class="chart-tab tab10">
+                <ul>
+                    <li><a href="###"  onclick="chart10tab(1,this)" class="chart-tab-select">注册数量</a></li>
+                    <li><a href="###"  onclick="chart10tab(2,this)">注册资金</a></li>
+                </ul>
+            </div>
+            <div id="chart10" class="chart-canvas" style="height: 300px">
+            </div>
+        </div>
+        <div class="chart">
+            <div class="chart-title">
+                <img src="images/in05.png"> 工艺品行业资讯
+            </div>
+            <div class="chart-tab tab11">
+                <ul>
+                    <li><a href="###"  onclick="chart11tab(1,this)" class="chart-tab-select">行业资讯</a></li>
+                    <li><a href="###"  onclick="chart11tab(2,this)">重点企业</a></li>
+                </ul>
+            </div>
+            <div  id="chart11" class="chart-canvas" style="height: 300px;color: #111"></div>
+        </div>
+        <div class="chart">
+            <div class="chart-title">
+                <img src="images/in06.png"> 汽车行业资讯
+            </div>
+            <div class="chart-tab tab12">
+                <ul>
+                    <li><a href="###"  onclick="chart12tab(1,this)" class="chart-tab-select">行业资讯</a></li>
+                    <li><a href="###"  onclick="chart12tab(2,this)">重点企业</a></li>
+                </ul>
+            </div>
+            <div id="chart12" class="chart-canvas" style="height: 300px;color: #111">
+
+            </div>
+        </div>
+    </div>
+    <div id="rightframe3" class="rightframe">
+        <div class="directory"><img src="images/d01.png"> <a href="http://192.168.2.134:8090/mhdsj/index.html">首页</a> &gt; 政府舆情应对能力</div>
+        <div class="" style="width: 100%;">
+            <div class="chart-tab tab13">
+                <div class="red">
+                    <h1>红 榜</h1>
+                    <div class="colorlist">
+                        <ul id="redlist">
+                        </ul>
+                    </div>
+                </div>
+                <div class="black">
+                    <h1>黑 榜</h1>
+                    <div class="colorlist">
+                        <ul id="blacklist">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
