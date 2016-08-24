@@ -706,7 +706,6 @@ $(function(){
                     data=eval("(" + data + ")");
                     var sbbymonth=data.data;
                     var sbbymonthLength=sbbymonth.length;
-                    console.log(sbbymonth);
                     var series=[];
                     for(var i=0;i<area.length;i++){
                         series.push({
@@ -794,7 +793,6 @@ $(function(){
     $("#sbtype,#getsb").change(function(){
         var temp=$("#getsb").val();
         var sbtype=$("#sbtype").val();
-        console.log(temp);
         chart6(type,temp,sbtype);
     });
 });
@@ -900,7 +898,6 @@ var chart8tab=function(type,e){
                 var hysl=data.data;
                 var hyslLength=hysl.length;
                 $("#chart8").empty();
-                console.log(hysl);
                 var chart8=echarts.init(document.getElementById("chart8"));
                 option = {
                     tooltip : {
@@ -1063,8 +1060,8 @@ var chart10tab=function(type,e){
         } 
     }
     else {
-        $($(".tab10 ul li a")[0]).addClass("chart-tab-select")
-        $($(".tab10 ul li a")[1]).removeClass("chart-tab-select")
+        $($(".tab10 ul li a")[0]).addClass("chart-tab-select");
+        $($(".tab10 ul li a")[1]).removeClass("chart-tab-select");
     }
     $.ajax({
         url:localStorage.ldjscurl+"/mhstraitbd/servlet/CommonServlet/GetGongShangClass ",
@@ -1453,7 +1450,6 @@ var chart12tab=function(type,e){
                 }
                 $("#chart12").append("<div class='loadmore' onclick='loadmore(this)'>加载更多……</div>");
                 //$(".article-title").click(function(){
-                //    console.log($(this));
                 //    var classtemp=$(this).next()[0].className;
                 //    if(classtemp=="article-content"){
                 //        $(this).next().append(cartemp[i].content)
